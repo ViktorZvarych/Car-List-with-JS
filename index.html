@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Car List</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+
+<body>
+    <div class="list">
+        <h1 class="list-title">Car List</h1>
+        <div class="list-container">
+            <form class="form-inline">
+                <input class="form-control mr-sm-2" type="search" id="searchInput" placeholder="Search...">
+            </form>
+            <button id="openAddBtn" class="btn">Add Car</button>
+        </div>
+        <table id="carTable" class="car-table table table-striped table-dark">
+            <thead>
+                <tr>
+                    <th>Company</th>
+                    <th>Model</th>
+                    <th>VIN</th>
+                    <th>Color</th>
+                    <th>Year</th>
+                    <th>Price</th>
+                    <th>Availability</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+        <div id="pagination" class="pagination"></div>
+    </div>
+
+    <!-- Edit Modal -->
+    <div id="editModal" class="list-modal hidden">
+        <div class="list-modal__content">
+            <div class="content-header">
+                <h2 class="modal-header">Edit Car</h2>
+                <button id="closeEditModalBtn" class="btn close-modal-btn">&times;</button>
+            </div>
+            <form id="editForm" class="edit-form">
+                <label for="editCompany">Company:</label>
+                <input type="text" id="editCompany" disabled>
+
+                <label for="editModel">Model:</label>
+                <input type="text" id="editModel" disabled>
+
+                <label for="editVIN">VIN:</label>
+                <input type="text" id="editVIN" disabled>
+
+                <label for="editColor">Color:</label>
+                <input type="text" id="editColor">
+
+                <label for="editYear">Year:</label>
+                <input type="number" id="editYear" disabled>
+
+                <label for="editPrice">Price:</label>
+                <input type="text" id="editPrice">
+
+                <label for="editAvailability">Availability:</label>
+                <input type="text" id="editAvailability">
+                <div class="modal-actions">
+                    <button id="saveEditButton" class="btn confirm-edit">Edit</button>
+                    <button id="closeEditButton" class="btn cancel-edit">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Delete Modal -->
+    <div id="deleteModal" class="list-modal hidden">
+        <div class="list-modal-content">
+            <h2 class="modal-header">Delete Car</h2>
+            <form id="deleteForm" class="delete-form">
+                <label for="deleteCompany">Company:</label>
+                <input type="text" id="deleteCompany" disabled>
+
+                <label for="deleteModel">Model:</label>
+                <input type="text" id="deleteModel" disabled>
+
+                <label for="deleteVIN">VIN:</label>
+                <input type="text" id="deleteVIN" disabled>
+
+                <label for="deleteColor">Color:</label>
+                <input type="text" id="deleteColor" disabled>
+
+                <label for="deleteYear">Year:</label>
+                <input type="number" id="deleteYear" disabled>
+
+                <label for="deletePrice">Price:</label>
+                <input type="text" id="deletePrice" disabled>
+
+                <label for="deleteAvailability">Availability:</label>
+                <input type="text" id="deleteAvailability" disabled>
+            </form>
+            <p>Are you sure you want to delete this car?</p>
+            <div class="modal-actions">
+                <button id="confirmDeleteButton" class="btn confirm-delete">Delete</button>
+                <button id="cancelDeleteButton" class="btn cancel-delete">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Modal -->
+    <div id="addModal" class="list-modal hidden">
+        <div class="list-modal-content">
+            <h2 class="modal-header">Add Car</h2>
+            <form id="addForm" class="add-form">
+                <label for="addCompany">Company:</label>
+                <input type="text" id="addCompany" required>
+
+                <label for="addModel">Model:</label>
+                <input type="text" id="addModel" required>
+
+                <label for="addVIN">VIN:</label>
+                <input type="text" id="addVIN" required>
+
+                <label for="addColor">Color:</label>
+                <input type="text" id="addColor" required>
+
+                <label for="addYear">Year:</label>
+                <input type="number" id="addYear" required>
+
+                <label for="addPrice">Price:</label>
+                <input type="text" id="addPrice" required>
+
+                <label for="availabilityInput">Availability:</label>
+                <select id="addAvailability" required>
+                    <option value=""></option>
+                    <option value="true">True</option>
+                    <option value="false">False</option>
+                </select>
+            </form>
+            <p>Are you sure you want to add this car?</p>
+            <div class="modal-actions">
+                <button id="confirmAddButton" class="btn confirm-add">Add Car</button>
+                <button id="closeAddButton" class="btn cancel-add">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="./js/main.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,82 @@
+.list {
+  width: 90%;
+  z-index: 1;
+  margin: 0 auto;
+}
+
+.list-title {
+  text-align: center;
+}
+
+.list-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: start;
+}
+
+.car-table {
+    max-width: 1000px;
+    margin: 1rem auto;
+}
+
+.pagination {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  width: 80%;
+  margin: 0 auto;
+}
+
+.page-link {
+  width: 50px;
+}
+
+.active {
+  border: 1px solid #ff0000;
+}
+
+.hidden {
+  display: none;
+}
+
+.list-modal {
+  position: fixed;
+  z-index: 5;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  margin: 0 10%;
+  padding: 1rem;
+  background-color: #fff;
+  overflow: auto;
+}
+
+.content-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 1rem;
+}
+
+.close-modal-btn {
+    max-height: 37px;
+}
+
+.edit-form,
+.delete-form,
+.add-form {
+  display: flex;
+  flex-direction: column;
+}
+
+input {
+  margin-bottom: 0.8rem;
+}
+
+.modal-actions {
+  background-color: #fff;
+  display: flex;
+  justify-content: center;
+  gap: 3rem;
+}
