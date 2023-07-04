@@ -1,3 +1,32 @@
+// Function to initialize the page
+function initializePage() {
+  const searchInput = document.querySelector("#searchInput");
+  //   const addCarBtn = document.querySelector("#addCarBtn");
+
+  searchInput.addEventListener("input", handleSearch);
+  //   addCarBtn.addEventListener("click", handleAddCarButtonClick);
+
+  const storedCars = localStorage.getItem("cars");
+
+  if (storedCars) {
+    carsData = JSON.parse(storedCars);
+    currentPage = 1; // Show first page initially
+    renderPagination(); // Render pagination links first
+    populateTable(currentPage);
+  } else {
+    fetchCarData()
+      .then((cars) => {
+        currentPage = 1; // Show first page initially
+        renderPagination(); // Render pagination links first
+        populateTable(currentPage);
+      })
+      .catch((error) => {
+        console.error("Error fetching car data:", error);
+      });
+  }
+}
+
+// #region Data
 let carsData = []; // Variable to store all car data
 
 // Function to fetch car data from the API
@@ -14,6 +43,16 @@ async function fetchCarData() {
     return [];
   }
 }
+
+// Function to retrieve cars from local storage or API
+function getCarsFromLocalStorage() {
+  const storedCars = localStorage.getItem("cars");
+  return storedCars ? JSON.parse(storedCars) : [];
+}
+
+// #endregion
+
+// #region Table
 
 // Function to create a table row for a car
 function createTableRow(car) {
@@ -57,11 +96,14 @@ function handleActionChange(event) {
   event.target.value = "";
 }
 
+// #endregion
+
+// #region Pagination
+
 const paginationContainer = document.querySelector("#pagination"); //Container for pagination
 
 let currentPage = 1; // Variable for current page
 let activePage = null; // Variable for active page link
-
 
 // Function to render the pagination links
 function renderPagination() {
@@ -122,6 +164,10 @@ function handlePageClick(event) {
   populateTable(currentPage);
 }
 
+// #endregion
+
+// #region Search
+
 // Function to handle the search functionality
 function handleSearch(event) {
   const searchQuery = event.target.value.toLowerCase();
@@ -152,39 +198,9 @@ function populateTableWithSearchResults(filteredCars) {
   });
 }
 
-// Function to initialize the page
-function initializePage() {
-  const searchInput = document.querySelector("#searchInput");
-  //   const addCarBtn = document.querySelector("#addCarBtn");
+// #endregion
 
-  searchInput.addEventListener("input", handleSearch);
-  //   addCarBtn.addEventListener("click", handleAddCarButtonClick);
-
-  const storedCars = localStorage.getItem("cars");
-
-  if (storedCars) {
-    carsData = JSON.parse(storedCars);
-    currentPage = 1; // Show first page initially
-    renderPagination(); // Render pagination links first
-    populateTable(currentPage);
-  } else {
-    fetchCarData()
-      .then((cars) => {
-        currentPage = 1; // Show first page initially
-        renderPagination(); // Render pagination links first
-        populateTable(currentPage);
-      })
-      .catch((error) => {
-        console.error("Error fetching car data:", error);
-      });
-  }
-}
-
-// Function to retrieve cars from local storage or API
-function getCarsFromLocalStorage() {
-  const storedCars = localStorage.getItem("cars");
-  return storedCars ? JSON.parse(storedCars) : [];
-}
+// #region Edit Modal
 
 const editModal = document.getElementById("editModal"); // The edit modal element
 
@@ -247,10 +263,9 @@ function handleSaveEditButtonClick() {
     // Update the car data in local storage
     localStorage.setItem("cars", JSON.stringify(carsData));
     // Repopulate the table with the updated car data
-      console.log(currentPage);
-      populateTable(currentPage);
-      console.log(currentPage);
-      
+    console.log(currentPage);
+    populateTable(currentPage);
+    console.log(currentPage);
   }
 
   // Hide the edit modal
@@ -271,11 +286,22 @@ function handleCloseEditButtonClick() {
   editModal.classList.add("hidden");
 }
 
+// Close Edit Modal Button
+const closeEditModalBtn = document.getElementById("closeEditModalBtn");
+closeEditModalBtn.addEventListener("click", handleCloseEditModalBtn);
+
+// function to close Edit Modal
+function handleCloseEditModalBtn() {
+  editModal.classList.add("hidden");
+}
+
+// #endregion
+
 // #region Delete Modal
 
 // Function to open the delete modal
 
-  // Get the edit modal element
+// Get the edit modal element
 const deleteModal = document.getElementById("deleteModal");
 
 function openDeleteModal(carData) {
@@ -336,6 +362,15 @@ function deleteCar(carData, currentPage) {
 const confirmDeleteButton = document.getElementById("confirmDeleteButton");
 confirmDeleteButton.addEventListener("click", deleteCar);
 
+// Close Delete Modal Button
+const closeDeleteModalBtn = document.getElementById("closeDeleteModalBtn");
+closeDeleteModalBtn.addEventListener("click", handleCloseDeleteModalBtn);
+
+// function to close Delete Modal
+function handleCloseDeleteModalBtn() {
+  deleteModal.classList.add("hidden");
+}
+
 // #endregion
 
 // #region Add Modal
@@ -367,7 +402,7 @@ function handleAddCarConfirm(event) {
   const availabilityInput = document.querySelector("#addAvailability");
 
   console.log(availabilityInput);
-  console.log(typeof(availabilityInput));
+  console.log(typeof availabilityInput);
 
   // Validate the form inputs
   if (
@@ -434,14 +469,16 @@ const closeAddButton = document.getElementById("closeAddButton");
 // Hide the Add modal
 closeAddButton.addEventListener("click", handleCloseAddButtonClick);
 
+// Close Add Modal Button
+const closeAddModalBtn = document.getElementById("closeAddModalBtn");
+closeAddModalBtn.addEventListener("click", handleCloseAddModalBtn);
+
+// function to close Edit Modal
+function handleCloseAddModalBtn() {
+  addModal.classList.add("hidden");
+}
+
 // #endregion
 
-const closeEditModalBtn = document.getElementById("closeEditModalBtn");
-closeEditModalBtn.addEventListener("click", handleCloseEditModalBtn);
-
-function handleCloseEditModalBtn() {
-    editModal.classList.add("hidden");
-}
-    
-  // Call the initializePage function when the DOM is ready
-  document.addEventListener("DOMContentLoaded", initializePage);
+// Call the initializePage function when the DOM is ready
+document.addEventListener("DOMContentLoaded", initializePage);

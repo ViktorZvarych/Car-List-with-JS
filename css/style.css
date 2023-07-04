@@ -80,3 +80,8 @@ input {
   justify-content: center;
   gap: 3rem;
 }
+
+.delete-form__text {
+    color: #ff0000;
+    text-align: center;
+}
