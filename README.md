@@ -1,4 +1,4 @@
-This app is live at https://viktorzvarych.github.io/Car-Table-for-CHI-IT/
+This app is live at https://viktorzvarych.github.io/Car-List-with-JS/
 
 1. This app contains table with cars list. Table contains listed columns. Table uses pagination locally. Search on top of the table works accross all entries, not only listed page.
   - Company
